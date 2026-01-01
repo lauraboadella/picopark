@@ -22,7 +22,9 @@ public class Players : NetworkBehaviour
     );
 
 
-
+  // private bool puedeSaltar = true;
+   // private float ultimoSalto = 0f;
+    
 
 
     public override void OnNetworkSpawn() //cuando se inicia la conexion
@@ -69,16 +71,11 @@ public class Players : NetworkBehaviour
 
 
         //salto
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.linearVelocity.y) < 0.1f)
         {
-            // Resetear velocidad Y primero
-            Vector2 vel = rb.linearVelocity;
-            vel.y = 0f;
-            rb.linearVelocity = vel;
-            
-            // Aplicar fuerza de salto
-            rb.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
-            
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
+
+
 
         }
         
