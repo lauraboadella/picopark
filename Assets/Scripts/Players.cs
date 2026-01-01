@@ -6,9 +6,13 @@ public class Players : NetworkBehaviour
 {
 
     public float velocidad = 5f;
+    public float fuerzaSalto = 12f;
+
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private Rigidbody2D rb;
+
 
     //para que se gire en todas partes hay que hacerlo con networkvariableeeee
     private NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(
@@ -18,13 +22,19 @@ public class Players : NetworkBehaviour
     );
 
 
+
+
+
     public override void OnNetworkSpawn() //cuando se inicia la conexion
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 
         spriteRenderer.flipX = isFlipped.Value;
         isFlipped.OnValueChanged += OnFlipChanged;
+
+
     }
     //fin de cuando se inicia la conexion
 
@@ -57,6 +67,21 @@ public class Players : NetworkBehaviour
                 isFlipped.Value = newFlip;
         }
 
+
+        //salto
+        if (Input.GetButtonDown("Jump"))
+        {
+            // Resetear velocidad Y primero
+            Vector2 vel = rb.linearVelocity;
+            vel.y = 0f;
+            rb.linearVelocity = vel;
+            
+            // Aplicar fuerza de salto
+            rb.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+            
+
+        }
+        
         
         UpdateAnimationServerRpc(move != 0);// hay que mandar los cambios de animacion al server porque ahi es donde funciona el network animator
     }

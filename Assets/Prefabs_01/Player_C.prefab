@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   velocidad: 5
+  fuerzaSalto: 12
 --- !u!114 &293599019281032869
 MonoBehaviour:
   m_ObjectHideFlags: 0
