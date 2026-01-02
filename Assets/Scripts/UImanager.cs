@@ -6,6 +6,7 @@ public class uiManager : MonoBehaviour
 {
     public Button buttonHost;
     public Button buttonClient;
+    public Button buttonReset;
 
     void Start()
     {
@@ -22,5 +23,10 @@ public class uiManager : MonoBehaviour
     public void connectclient()
     {
         NetworkManager.Singleton.StartClient();
+    }
+
+    public void resetlevel()
+    {
+        PlayerManager.Instance.RestartLevel();
     }
 }
