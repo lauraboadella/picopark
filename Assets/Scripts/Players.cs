@@ -5,6 +5,7 @@ using Unity.Netcode.Components;
 public class Players : NetworkBehaviour
 {
 
+
     public float velocidad = 5f;
     public float fuerzaSalto = 12f;
 
@@ -12,6 +13,8 @@ public class Players : NetworkBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Rigidbody2D rb;
+
+
 
 
     //para que se gire en todas partes hay que hacerlo con networkvariableeeee
@@ -22,9 +25,10 @@ public class Players : NetworkBehaviour
     );
 
 
-  // private bool puedeSaltar = true;
-   // private float ultimoSalto = 0f;
-    
+    // private bool puedeSaltar = true;
+    // private float ultimoSalto = 0f;
+
+
 
 
     public override void OnNetworkSpawn() //cuando se inicia la conexion
@@ -55,6 +59,14 @@ public class Players : NetworkBehaviour
     {
         if (!IsOwner) return;
 
+
+        if (Input.GetKeyDown(KeyCode.K)) // tecla de prueba muerte
+        {
+            DieServerRpc();
+        }
+
+
+
         float move = Input.GetAxisRaw("Horizontal");
 
         
@@ -84,9 +96,6 @@ public class Players : NetworkBehaviour
     }
 
 
-
-
-
     [ServerRpc]
     void UpdateAnimationServerRpc(bool andando)
     {
@@ -105,4 +114,13 @@ public class Players : NetworkBehaviour
     {
         spriteRenderer.flipX = newValue; 
     }
+
+
+    [ServerRpc]
+    private void DieServerRpc()
+    {
+        PlayerManager.Instance.RestartLevel();
+    }
+
+
 }
