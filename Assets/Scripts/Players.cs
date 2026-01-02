@@ -5,6 +5,7 @@ using Unity.Netcode.Components;
 public class Players : NetworkBehaviour
 {
 
+
     public float velocidad = 5f;
     public float fuerzaSalto = 12f;
 
@@ -12,6 +13,8 @@ public class Players : NetworkBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Rigidbody2D rb;
+
+
 
 
     //para que se gire en todas partes hay que hacerlo con networkvariableeeee
@@ -22,9 +25,10 @@ public class Players : NetworkBehaviour
     );
 
 
-  // private bool puedeSaltar = true;
-   // private float ultimoSalto = 0f;
-    
+    // private bool puedeSaltar = true;
+    // private float ultimoSalto = 0f;
+
+
 
 
     public override void OnNetworkSpawn() //cuando se inicia la conexion
@@ -32,6 +36,9 @@ public class Players : NetworkBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        spriteRenderer.enabled = true;
+        animator.enabled = true;
 
         spriteRenderer.flipX = isFlipped.Value;
         isFlipped.OnValueChanged += OnFlipChanged;
@@ -55,9 +62,17 @@ public class Players : NetworkBehaviour
     {
         if (!IsOwner) return;
 
+
+        if (Input.GetKeyDown(KeyCode.K)) // tecla de prueba muerte
+        {
+            DieServerRpc();
+        }
+
+
+
         float move = Input.GetAxisRaw("Horizontal");
 
-        
+
         //movimiento del player
         transform.position += Vector3.right * move * velocidad * Time.deltaTime;
 
@@ -75,17 +90,11 @@ public class Players : NetworkBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
 
-
-
         }
-        
-        
+
+
         UpdateAnimationServerRpc(move != 0);// hay que mandar los cambios de animacion al server porque ahi es donde funciona el network animator
     }
-
-
-
-
 
     [ServerRpc]
     void UpdateAnimationServerRpc(bool andando)
@@ -93,16 +102,50 @@ public class Players : NetworkBehaviour
         //.Play no va
 
 
-        animator.SetBool("Andar", andando); 
+        animator.SetBool("Andar", andando);
         //usando la bool en cada animator CON EL MISMO NOMBRE en cada aniamtor tb es la unica forma de que se hagan bien
         //porque networkaniamtor no admite lo .play solo .setbool .settrigger etc
     }
 
-
-
-
     void OnFlipChanged(bool oldValue, bool newValue)
     {
-        spriteRenderer.flipX = newValue; 
+        spriteRenderer.flipX = newValue;
     }
+
+    //----- cosas para el reset de personaje al morir alguien
+
+    [ServerRpc]
+    private void DieServerRpc()
+    {
+        Debug.Log("va dieserverrpc en player");
+        PlayerManager.Instance.RestartLevel();
+    }
+
+
+    //TODOS pueden hacer el reset de TODOS
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void ResetPlayerServerRpc()
+    {
+        // ejecutat en servidor para todosss los players
+        ResetPlayerClientRpc();
+    }
+
+
+
+    [ClientRpc]
+    private void ResetPlayerClientRpc()
+    {
+        // ejecutar en todos los clientas
+        ResetPlayer();
+    }
+
+    public void ResetPlayer()
+    {
+        transform.position = Vector3.zero;
+        animator.Play("Idle");
+        isFlipped.Value = false;
+        spriteRenderer.flipX = false;
+    }
+
+
 }
