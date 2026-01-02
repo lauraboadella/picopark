@@ -25,9 +25,9 @@ public class pincho : MonoBehaviour
     
     void GameOver()
     {
-        if (pantallaGameOver != null)
+        if (pantallaGameOver != null){
             pantallaGameOver.SetActive(true);
-        
+        }
 
 
         Time.timeScale = 0f;
