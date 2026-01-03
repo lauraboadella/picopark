@@ -7,60 +7,67 @@ public class puerta : NetworkBehaviour
     public GameObject puertaCerrada;
     public GameObject pantallaWin;
 
-    
+    private NetworkVariable<bool> jugadorEnTrigger = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!IsServer) return;
         if (other.CompareTag("Player"))
         {
             Players jugador = other.GetComponent<Players>();
-            
+
+
             if (jugador != null && jugador.tieneCombustible)
             {
+                jugadorEnTrigger.Value = true;
                 DesactivarPuertaClientRpc();
-
             }
 
 
         }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Players jugador = other.GetComponent<Players>();
+        //if (jugador != null && jugador.IsOwner)
+        if (other.CompareTag("Player"))
+        {
+            jugadorEnTrigger.Value = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (!IsClient) return;
+
+        if (Input.GetKeyDown(KeyCode.W) && jugadorEnTrigger.Value)
+        {
+            WinServerRpc();
+        }
+    }
+
+
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    void WinServerRpc()
+    {
+        if (jugadorEnTrigger.Value)
+            PantallaWinClientRpc();
     }
 
     [ClientRpc]
     void DesactivarPuertaClientRpc()
     {
-            puertaCerrada.SetActive(false);
-
-    
+        puertaCerrada.SetActive(false);
     }
 
-
-    
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && other.GetComponent<Players>().IsOwner)
-        {
-            Players jugador = other.GetComponent<Players>();
-            if (jugador.tieneCombustible && Input.GetKeyDown(KeyCode.W))
-            {
-                PantallaWinClientRpc();
-
-            }
-        }
-    }
-    
     [ClientRpc]
     void PantallaWinClientRpc()
     {
-
-            pantallaWin.SetActive(true);
+        pantallaWin.SetActive(true);
     }
 
 
