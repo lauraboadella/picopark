@@ -14,6 +14,7 @@ public class Players : NetworkBehaviour
     private Animator animator;
     private Rigidbody2D rb;
 
+    public bool tieneCombustible = false;
 
 
 
@@ -148,4 +149,20 @@ public class Players : NetworkBehaviour
     }
 
 
+
+/*
+  void OnTriggerEnter2D(Collider2D other)
+    {
+        //if (!IsOwner) return; 
+        
+        if (other.CompareTag("Combustible"))
+        {
+            tieneCombustible = true;
+            other.gameObject.SetActive(false);
+
+
+        }
+
+
+    }*/
 }

@@ -1,16 +1,29 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class combustible : MonoBehaviour
+public class combustible : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnTriggerEnter2D(Collider2D other)
     {
+        if (!IsServer) return;
         
-    }
+        
+        if (other.CompareTag("Player"))
+        {
+            Players player = other.GetComponent<Players>();
+            if (player != null)
+                player.tieneCombustible = true;
+            
 
-    // Update is called once per frame
-    void Update()
+
+            desactivarCombustibleClientRpc();
+    }
+    }
+    
+    [ClientRpc]
+    void desactivarCombustibleClientRpc()
     {
-        
+        gameObject.SetActive(false);
+
     }
 }
