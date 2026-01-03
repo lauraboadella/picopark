@@ -1269,6 +1269,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519132016228535783, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 519132016228535783, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.28
+      objectReference: {fileID: 0}
     - target: {fileID: 2919762738457897901, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
       propertyPath: m_Name
       value: caja
@@ -1288,6 +1296,22 @@ PrefabInstance:
     - target: {fileID: 3160132666059847952, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 829062734
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561801445018614649, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f1fcc860d46df92488e5b242b7f4d4e5, type: 3}
+    - target: {fileID: 4561801445018614649, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561801445018614649, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561801445018614649, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5077544066781945218, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}
       propertyPath: m_LocalPosition.x
