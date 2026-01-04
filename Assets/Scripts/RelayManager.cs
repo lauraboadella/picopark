@@ -32,15 +32,36 @@ public async void StartRelay()
 
     }
 
+    public async void JoinRelay()
+    {
+        await StartClientWithRelay(joinCodeInputField.text);
+    }
+
 private async Task<string> StartHostWithRelay(int maxConnections = 3)
     {
+
+        /*
+
+        try
+        {
+                Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
+
+        }
+        catch
+        {
+            Debug.LogError("Creating allocation failed");
+            throw;
+        }
+
+        */
+
     Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
 
     NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
 
-    string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation. AllocationId);
+    string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-    return NetworkManager.Singleton. StartHost() ? joinCode : null;
+    return NetworkManager.Singleton.StartHost() ? joinCode : null;
 
 
     }
@@ -53,7 +74,7 @@ private async Task<bool> StartClientWithRelay (string joinCode)
 
     NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData (new RelayServerData (joinAllocation, "dtls"));
 
-    return !string.IsNullOrEmpty(joinCode) && NetworkManager.Singleton. StartClient();
+    return !string.IsNullOrEmpty(joinCode) && NetworkManager.Singleton.StartClient();
 
     }
 }

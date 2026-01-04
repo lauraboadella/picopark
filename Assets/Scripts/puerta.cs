@@ -43,8 +43,8 @@ public class puerta : NetworkBehaviour
     {
         if (!IsClient) return;
 
-        if (Input.GetKeyDown(KeyCode.W) && jugadorEnTrigger.Value)
-        {
+if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) && 
+    jugadorEnTrigger.Value)        {
             WinServerRpc();
         }
     }
