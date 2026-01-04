@@ -12,7 +12,7 @@ public class boton : MonoBehaviour
     public enum TipoBoton
     {
         Plataforma,
-        Pinchos
+        Morir
     }
     public TipoBoton tipoboton;
 
@@ -68,8 +68,8 @@ public class boton : MonoBehaviour
                     animPlataforma.SetBool("Mover", mover);
                 break;
 
-            case TipoBoton.Pinchos:
-                pinchosmortales.SetActive(true);
+            case TipoBoton.Morir:
+                PlayerManager.Instance.RestartLevel();
                 break;
         }
     }

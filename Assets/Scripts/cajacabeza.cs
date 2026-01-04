@@ -24,13 +24,13 @@ public class BoxHeadAttach : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        // Si está pegada, sigue la cabeza del jugador
+       
         if (isAttached && attachedPlayerHead != null)
         {
             transform.position = attachedPlayerHead.position + attachOffset;
         }
 
-        // Timer para despawn
+       
         if (isAttached)
         {
             despawnTimer += Time.deltaTime;
@@ -46,10 +46,10 @@ public class BoxHeadAttach : NetworkBehaviour
         if (!IsServer) return;
         if (isAttached) return;
 
-        // Solo detecta la cabeza
+        
         if (other.CompareTag("Cabeza"))
         {
-            // Solo si la caja está cayendo
+            
             if (rb.linearVelocity.y < -0.1f)
             {
                 AttachToPlayer(other.transform);
@@ -63,16 +63,10 @@ public class BoxHeadAttach : NetworkBehaviour
         isAttached = true;
         despawnTimer = 0f;
 
-        // Quitar física para evitar conflictos al estar pegada
+        
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
-    // Opcional: si quieres soltar la caja
-    public void Detach()
-    {
-        isAttached = false;
-        attachedPlayerHead = null;
-        rb.bodyType = RigidbodyType2D.Dynamic;
-    }
+    
 }

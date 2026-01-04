@@ -2,6 +2,7 @@ using Unity.Netcode;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 
 public class PlayerManager : NetworkBehaviour
@@ -60,16 +61,19 @@ public class PlayerManager : NetworkBehaviour
     //-----
 
 
+
     public void RestartLevel()
     {
 
         //--- objetos
         if (!IsServer) return;
         Debug.Log("se hace RestartLevel");
+       
         foreach (var obj in objetosReseteables)
         {
             Debug.Log("se hace el foreach");
             obj.Reset();
+            
         }
 
 

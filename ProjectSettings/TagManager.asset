@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Combustible
   - Cabeza
+  - PinchoTecho
   layers:
   - Default
   - TransparentFX

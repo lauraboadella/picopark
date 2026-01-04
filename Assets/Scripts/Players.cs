@@ -75,12 +75,13 @@ public class Players : NetworkBehaviour
 
 
         //movimiento del player
-        transform.position += Vector3.right * move * velocidad * Time.deltaTime;
+        //transform.position += Vector3.right * move * velocidad * Time.deltaTime;
+        rb.linearVelocity = new Vector2(move * velocidad, rb.linearVelocity.y);
 
         // flip con lo de network variable para que se pase de cada player a todas las pantallas
         if (move != 0)
         {
-            bool newFlip = move > 0;
+            bool newFlip = move < 0;
             if (newFlip != isFlipped.Value)
                 isFlipped.Value = newFlip;
         }
@@ -146,6 +147,7 @@ public class Players : NetworkBehaviour
         animator.Play("Idle");
         isFlipped.Value = false;
         spriteRenderer.flipX = false;
+        rb.linearVelocity = Vector2.zero;
     }
 
 
