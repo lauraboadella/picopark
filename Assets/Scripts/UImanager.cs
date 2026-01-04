@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class uiManager : MonoBehaviour
@@ -27,6 +28,15 @@ public class uiManager : MonoBehaviour
 
     public void resetlevel()
     {
-        PlayerManager.Instance.RestartLevel();
+        //PlayerManager.Instance.RestartLevel();
+        ReiniciarEscenaMultiplayer();
     }
+
+    private void ReiniciarEscenaMultiplayer()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        // Esto sincroniza la carga de la escena para todos los clientes
+        NetworkManager.Singleton.SceneManager.LoadScene(currentScene, LoadSceneMode.Single);
+    }
+
 }

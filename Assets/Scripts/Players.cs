@@ -94,6 +94,19 @@ public class Players : NetworkBehaviour
 
         }
 
+        /*if (Input.GetButtonDown("Jump"))
+        {
+            JumpServerRpc();
+        }
+
+        [ServerRpc]
+        void JumpServerRpc(ServerRpcParams rpcParams = default)
+        {
+            if (Mathf.Abs(rb.linearVelocity.y) < 0.1f)
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
+        }*/
+
+
 
         UpdateAnimationServerRpc(move != 0);// hay que mandar los cambios de animacion al server porque ahi es donde funciona el network animator
     }

@@ -1,4 +1,6 @@
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class pinchoTecho : MonoBehaviour
 {
@@ -27,10 +29,19 @@ public class pinchoTecho : MonoBehaviour
         {
             PlayerManager.Instance.RestartLevel();
         }
-
         if (collision.collider.CompareTag("Suelo"))
         {
             gameObject.SetActive(false);
         }
+    }
+
+
+
+
+    private void ReiniciarEscenaMultiplayer()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        // Esto sincroniza la carga de la escena para todos los clientes
+        NetworkManager.Singleton.SceneManager.LoadScene(currentScene, LoadSceneMode.Single);
     }
 }

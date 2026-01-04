@@ -184,11 +184,7 @@ public class cajacabeza : NetworkBehaviour
 
     }
 
-    [ServerRpc]
-    public void PushServerRpc(Vector2 force)
-    {
-        rb.AddForce(force); // Aplica la fuerza solo en el servidor
-    }
+
 
 
 

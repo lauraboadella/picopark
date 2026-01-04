@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 293599019281032869}
   - component: {fileID: 7255453070726458285}
   - component: {fileID: 7580528880473338455}
-  - component: {fileID: 1910265926521411523}
+  - component: {fileID: 6468578815813062321}
   m_Layer: 0
   m_Name: Player_C
   m_TagString: Player
@@ -235,7 +235,7 @@ Rigidbody2D:
   m_Mass: 3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: e8240299d2ff74843931fbbfbd3e20b5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -264,8 +264,8 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
---- !u!70 &1910265926521411523
-CapsuleCollider2D:
+--- !u!61 &6468578815813062321
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -298,9 +298,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  m_Offset: {x: -0.008544922, y: 0.0011303425}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.3333334, y: 1.3333334}
+    newSize: {x: 1.3333334, y: 1.3333334}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.076355, y: 1.3677392}
+  m_EdgeRadius: 0
 --- !u!1 &2084114456545905553
 GameObject:
   m_ObjectHideFlags: 0

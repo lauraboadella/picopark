@@ -1,5 +1,6 @@
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class boton : MonoBehaviour
@@ -21,7 +22,7 @@ public class boton : MonoBehaviour
 
     public GameObject pinchosmortales;
     //public pincho pincho;
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,9 +70,21 @@ public class boton : MonoBehaviour
                 break;
 
             case TipoBoton.Morir:
-                PlayerManager.Instance.RestartLevel();
-                break;
+                //PlayerManager.Instance.RestartLevel();
+
+                    ReiniciarEscenaMultiplayer();
+
+                    break;
         }
     }
 
+    private void ReiniciarEscenaMultiplayer()
+    {
+        string currentScene = SceneManager.GetActiveScene().name; 
+        // Esto sincroniza la carga de la escena para todos los clientes
+        NetworkManager.Singleton.SceneManager.LoadScene(currentScene, LoadSceneMode.Single); 
+    } 
+
+
 }
+
