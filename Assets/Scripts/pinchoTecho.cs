@@ -1,8 +1,8 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class pinchoTecho : MonoBehaviour
+
+public class pinchoTecho : NetworkBehaviour
 {
     private Rigidbody2D rb;
     
@@ -18,8 +18,8 @@ public class pinchoTecho : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            
-            rb.gravityScale = 3f; 
+
+            ActivarGravedadServerRpc();
         }
     }
 
@@ -31,8 +31,26 @@ public class pinchoTecho : MonoBehaviour
         }
         if (collision.collider.CompareTag("Suelo"))
         {
-            gameObject.SetActive(false);
+            DesactivarPinchoServerRpc();
         }
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    void ActivarGravedadServerRpc()
+    {
+        rb.gravityScale = 3f;
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    void DesactivarPinchoServerRpc()
+    {
+        DesactivarPinchoClientRpc();
+    }
+
+    [ClientRpc]
+    void DesactivarPinchoClientRpc()
+    {
+        gameObject.SetActive(false);
     }
 
 
