@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using System.Collections;
+
 
 public class Players : NetworkBehaviour
 {
@@ -37,6 +39,8 @@ public class Players : NetworkBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
+
 
         spriteRenderer.enabled = true;
         animator.enabled = true;
@@ -75,7 +79,8 @@ public class Players : NetworkBehaviour
 
 
         //movimiento del player
-        transform.position += Vector3.right * move * velocidad * Time.deltaTime;
+        //transform.position += Vector3.right * move * velocidad * Time.deltaTime;
+        rb.linearVelocity = new Vector2(move * velocidad, rb.linearVelocity.y);
 
         // flip con lo de network variable para que se pase de cada player a todas las pantallas
         if (move != 0)
@@ -140,29 +145,58 @@ public class Players : NetworkBehaviour
         ResetPlayer();
     }
 
+    /*public void ResetPlayer()
+          {
+            Collider2D col = GetComponent<BoxCollider2D>();
+            if (col != null)
+            {
+                Debug.Log("col isnt null");
+                col.enabled = false;
+                if (!col.enabled) Debug.Log("col de verdad no enabled");
+            }
+            else { Debug.Log("col is null"); }
+
+                transform.position = Vector3.zero;
+              animator.Play("Idle");
+              isFlipped.Value = false;
+              spriteRenderer.flipX = false;
+
+
+           // if (col != null) col.enabled = true;
+          }*/
+
     public void ResetPlayer()
     {
-        transform.position = Vector3.zero;
+        Collider2D col = GetComponent<Collider2D>();
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        // Desactivar collider momentáneamente
+        if (col != null) col.enabled = false;
+
+        // Reset de física
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.gravityScale = 1f; // asegúrate de que es la correcta
+
+        // Reset de posición
+       transform.position = Vector3.zero;
+        rb.WakeUp();
+
+        // Reset visual
         animator.Play("Idle");
         isFlipped.Value = false;
         spriteRenderer.flipX = false;
+
+        // Reactivar collider
+        if (col != null) col.enabled = true;
+
+        Debug.Log("RB sleeping? " + rb.IsSleeping());
+        Debug.Log("Constraints: " + rb.constraints);
+        Debug.Log("SIMULATED = " + rb.simulated);
+
+
     }
 
 
 
-/*
-  void OnTriggerEnter2D(Collider2D other)
-    {
-        //if (!IsOwner) return; 
-        
-        if (other.CompareTag("Combustible"))
-        {
-            tieneCombustible = true;
-            other.gameObject.SetActive(false);
-
-
-        }
-
-
-    }*/
 }

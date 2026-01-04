@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class desaparecer : MonoBehaviour
 {
-    public GameObject[] plataformas; // 5 plataformas en orden
+    public GameObject[] plataformas; 
     public float tiempoCambio = 2f;
 
     float timer;
