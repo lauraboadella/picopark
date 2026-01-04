@@ -17,6 +17,7 @@ public class cajacabeza : NetworkBehaviour
 
     private float despawnTimer = 0f;
     private const float timeToDespawn = 10f;
+<<<<<<< Updated upstream
     private NetworkVariable<bool> isAttachedNetwork = new NetworkVariable<bool>(
      false,
      NetworkVariableReadPermission.Everyone,
@@ -24,6 +25,13 @@ public class cajacabeza : NetworkBehaviour
  );
 
 
+=======
+       private NetworkVariable<bool> isAttachedNetwork = new NetworkVariable<bool>(
+        false,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+>>>>>>> Stashed changes
 
 
     void Awake()
@@ -33,29 +41,44 @@ public class cajacabeza : NetworkBehaviour
 
 
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
     void Start()
     {
         isAttachedNetwork.OnValueChanged += OnAttachedChanged;
 
+<<<<<<< Updated upstream
 
     }
 
 
+=======
+    }
+
+>>>>>>> Stashed changes
     void Update()
     {
         if (!IsServer) return;
 
+<<<<<<< Updated upstream
 
   
+=======
+        // Si est  pegada, sigue la cabeza del jugador
+>>>>>>> Stashed changes
         if (isAttached && attachedPlayerHead != null)
         {
             transform.position = attachedPlayerHead.position + attachOffset;
             UpdatePositionClientRpc(attachedPlayerHead.position + attachOffset);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         }
 
  
@@ -79,7 +102,11 @@ public class cajacabeza : NetworkBehaviour
      
         if (other.CompareTag("Cabeza"))
         {
+<<<<<<< Updated upstream
             
+=======
+            // Solo si la caja est  cayendo
+>>>>>>> Stashed changes
             if (rb.linearVelocity.y < -0.1f)
             {
                 AttachToPlayer(other.transform);
@@ -94,11 +121,15 @@ public class cajacabeza : NetworkBehaviour
         isAttached = true;
         despawnTimer = 0f;
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         // Quitar f sica para evitar conflictos al estar pegada
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
 
+<<<<<<< Updated upstream
 
         isAttachedNetwork.Value = true;
         AttachToPlayerClientRpc(playerHead.GetComponent<NetworkObject>().NetworkObjectId);
@@ -110,6 +141,81 @@ public class cajacabeza : NetworkBehaviour
 
 
     private void OnAttachedChanged(bool oldValue, bool newValue)
+=======
+        isAttachedNetwork.Value = true;
+        AttachToPlayerClientRpc(playerHead.GetComponent<NetworkObject>().NetworkObjectId);
+
+    }
+
+
+    private void OnAttachedChanged(bool oldValue, bool newValue)
+    {
+        if (newValue && !IsServer)
+        {
+            isAttached = true;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+    
+    }
+
+
+
+    [ClientRpc]
+    private void AttachToPlayerClientRpc(ulong playerNetworkId)
+    {
+        if (IsServer) return;
+        NetworkObject playerNetObj = FindNetworkObject(playerNetworkId);
+        if (playerNetObj != null)
+        {
+            attachedPlayerHead = playerNetObj.transform;
+            isAttached = true;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+    }
+
+
+
+    [ClientRpc]
+    private void UpdatePositionClientRpc(Vector3 newPosition)
+    {
+        if (IsServer) return;
+        
+        if (isAttached)
+        {
+            transform.position = newPosition;
+        }
+    }
+
+
+
+    private NetworkObject FindNetworkObject(ulong networkObjectId)
+    {
+        NetworkObject[] allObjects = FindObjectsOfType<NetworkObject>();
+        foreach (NetworkObject obj in allObjects)
+        {
+            if (obj.NetworkObjectId == networkObjectId)
+            {
+                return obj;
+            }
+        }
+
+
+        return null;
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        isAttachedNetwork.OnValueChanged -= OnAttachedChanged;
+        
+    }
+
+
+
+/*
+    // Opcional: si quieres soltar la caja
+    public void Detach()
+>>>>>>> Stashed changes
     {
         if (newValue && !IsServer)
         {
@@ -119,6 +225,7 @@ public class cajacabeza : NetworkBehaviour
 
     }
 
+<<<<<<< Updated upstream
 
 
 
@@ -186,4 +293,9 @@ public class cajacabeza : NetworkBehaviour
 
 
 
+=======
+    */
+
+    
+>>>>>>> Stashed changes
 }
