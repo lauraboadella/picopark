@@ -1422,6 +1422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1 &239030307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,6 +1775,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!61 &297661712
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2524,6 +2528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1 &507680436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3505,6 +3511,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!61 &724249530
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4260,6 +4268,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1001 &1002368754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4436,6 +4446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1 &1028496394
 GameObject:
   m_ObjectHideFlags: 0
@@ -4598,6 +4610,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!61 &1050770423
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4918,7 +4932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 66.1, y: 313}
+  m_AnchoredPosition: {x: 66.1, y: 22}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1206564039
@@ -5534,6 +5548,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1001 &1288178512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5710,6 +5726,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1001 &1296424761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5886,6 +5904,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1 &1334750258
 GameObject:
   m_ObjectHideFlags: 0
@@ -6228,7 +6248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonHost: {fileID: 630558741}
   buttonClient: {fileID: 559056405}
-  buttonReset: {fileID: 1223142098}
+  buttonReset: {fileID: 0}
 --- !u!1001 &1373584719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6340,6 +6360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!61 &1373584722
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7405,6 +7427,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!61 &1686725256
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7773,6 +7797,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!61 &1802892009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8567,6 +8593,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   gravedad: 1
+  pantallaGameOver: {fileID: 1193996383}
+  tiempoEspera: 3
 --- !u!1 &2115622342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2919762738457897901, guid: 13e75ebe1b6a91740b40e41f2d8b4690, type: 3}

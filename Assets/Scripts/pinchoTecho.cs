@@ -9,7 +9,7 @@ public class pinchoTecho : NetworkBehaviour
     public float tiempoEspera = 3f;
 
     private bool pinchoCae = false;
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +21,7 @@ public class pinchoTecho : NetworkBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
         }
     }
-
+    
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -33,18 +33,18 @@ public class pinchoTecho : NetworkBehaviour
 
         }
     }
-
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!IsServer) return;
-
+        
         if (collision.gameObject.CompareTag("Player"))
         {
             GameOver();
 
         }
     }
-
+    
     [ClientRpc]
     void PinchoCaeClientRpc()
     {
@@ -55,11 +55,11 @@ public class pinchoTecho : NetworkBehaviour
 
         }
     }
-
+    
     void GameOver()
     {
         GameOverClientRpc();
-
+        
         if (IsServer)
         {
             Invoke("ReiniciarPartida", tiempoEspera);
@@ -67,18 +67,18 @@ public class pinchoTecho : NetworkBehaviour
 
 
     }
-
+    
     [ClientRpc]
     void GameOverClientRpc()
     {
         if (pantallaGameOver != null)
             pantallaGameOver.SetActive(true);
-
-        Time.timeScale = 0f;
+        
+    Time.timeScale = 0f;
     }
+    
 
-
-
+    
     void ReiniciarPartida()
     {
         if (IsServer)
@@ -86,14 +86,14 @@ public class pinchoTecho : NetworkBehaviour
             ReiniciarClientRpc();
         }
     }
-
+    
 
 
     [ClientRpc]
     void ReiniciarClientRpc()
     {
         Time.timeScale = 1f;
-
+        
         if (pantallaGameOver != null)
             pantallaGameOver.SetActive(false);
 

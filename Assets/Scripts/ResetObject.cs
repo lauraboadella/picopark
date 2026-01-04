@@ -6,8 +6,6 @@ public class ResetObject : MonoBehaviour
     private Quaternion initialRotation;
     private bool initialActive;
 
-
-
     private void Awake()
     {
         // guardado de estado incial
@@ -19,24 +17,9 @@ public class ResetObject : MonoBehaviour
     // reseteo de todo a estado inicial otra ve
     public void Reset()
     {
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-        }
-
         Debug.Log("se hace reset en resetobject");
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         gameObject.SetActive(initialActive);
-
-
-
     }
-
-
-
-
 }

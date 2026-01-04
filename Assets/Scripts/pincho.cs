@@ -38,7 +38,8 @@ public class pincho : MonoBehaviour
     void ReiniciarPartida()
     {
         Time.timeScale = 1f;
-        PlayerManager.Instance.RestartLevel();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
 
     }
 }

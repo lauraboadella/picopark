@@ -2,7 +2,6 @@ using Unity.Netcode;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 
 public class PlayerManager : NetworkBehaviour
@@ -18,15 +17,16 @@ public class PlayerManager : NetworkBehaviour
 
     public override void OnNetworkSpawn() //cuando se sincroniza con la red
     {
-        Instance = this;
-
         if (!IsServer) return;
+
+        if (IsServer)
+            Instance = this;
 
         objetosReseteables = GameObject.FindObjectsByType<ResetObject>(FindObjectsSortMode.None);
 
 
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-        // cuando se conecta un nuevo cliente  se spawnea un jugador nuevo
+        // cuando se conecta un nuevo cliente  ->  se spawnea un jugador nuevo
     }
 
 
@@ -91,8 +91,6 @@ public class PlayerManager : NetworkBehaviour
             }
         }
     }
-
-
 }
 
 
