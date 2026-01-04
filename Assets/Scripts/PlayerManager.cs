@@ -13,7 +13,6 @@ public class PlayerManager : NetworkBehaviour
 
     //private bool restarting = false;
 
-
     public static PlayerManager Instance;
 
     public override void OnNetworkSpawn() //cuando se sincroniza con la red
@@ -38,7 +37,7 @@ public class PlayerManager : NetworkBehaviour
 
         if (sceneEvent.SceneEventType == SceneEventType.LoadComplete)
         {
-            // Despawn jugadores existentes antes de crear nuevos
+            //despawn jugadores existentes antes de crear nuevos
             foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
                 var client = NetworkManager.Singleton.ConnectedClients[clientId];
@@ -48,7 +47,7 @@ public class PlayerManager : NetworkBehaviour
                 }
             }
 
-            // Instanciar jugadores solo si no existen
+           // instanciar jugadores solo si no existen
             foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
                 int index = (int)(clientId % (ulong)playerPrefabs.Length);

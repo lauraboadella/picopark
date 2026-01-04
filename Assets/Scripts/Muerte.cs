@@ -9,7 +9,6 @@ public class Muerte : NetworkBehaviour
         if (other.CompareTag("Player"))
         {
 
-
             PlayerManager.Instance.RestartLevel();
         }
 

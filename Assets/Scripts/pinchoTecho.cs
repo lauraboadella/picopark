@@ -36,12 +36,4 @@ public class pinchoTecho : MonoBehaviour
     }
 
 
-
-
-    private void ReiniciarEscenaMultiplayer()
-    {
-        string currentScene = SceneManager.GetActiveScene().name;
-        // Esto sincroniza la carga de la escena para todos los clientes
-        NetworkManager.Singleton.SceneManager.LoadScene(currentScene, LoadSceneMode.Single);
-    }
 }
