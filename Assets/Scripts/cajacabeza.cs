@@ -8,13 +8,13 @@ public class cajacabeza : NetworkBehaviour
     private Rigidbody2D rb;
 
 
-    
+    // Variables para la caja pegada
     private bool isAttached = false;
     private Transform attachedPlayerHead;
     private Vector3 attachOffset = new Vector3(0f, 1f, 0f);
 
 
-
+    // Timer para despawn
     private float despawnTimer = 0f;
     private const float timeToDespawn = 10f;
     private NetworkVariable<bool> isAttachedNetwork = new NetworkVariable<bool>(
@@ -49,7 +49,7 @@ public class cajacabeza : NetworkBehaviour
         if (!IsServer) return;
 
 
-  
+        // Si est  pegada, sigue la cabeza del jugador
         if (isAttached && attachedPlayerHead != null)
         {
             transform.position = attachedPlayerHead.position + attachOffset;
@@ -58,7 +58,8 @@ public class cajacabeza : NetworkBehaviour
 
         }
 
- 
+
+        // Timer para despawn
         if (isAttached)
         {
             despawnTimer += Time.deltaTime;
@@ -76,10 +77,10 @@ public class cajacabeza : NetworkBehaviour
         if (isAttached) return;
 
 
-     
+        // Solo detecta la cabeza
         if (other.CompareTag("Cabeza"))
         {
-            
+            // Solo si la caja est  cayendo
             if (rb.linearVelocity.y < -0.1f)
             {
                 AttachToPlayer(other.transform);
@@ -183,6 +184,11 @@ public class cajacabeza : NetworkBehaviour
 
     }
 
+    [ServerRpc]
+    public void PushServerRpc(Vector2 force)
+    {
+        rb.AddForce(force); // Aplica la fuerza solo en el servidor
+    }
 
 
 

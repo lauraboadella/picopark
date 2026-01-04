@@ -152,19 +152,20 @@ public class Players : NetworkBehaviour
 
 
 
-/*
-  void OnTriggerEnter2D(Collider2D other)
-    {
-        //if (!IsOwner) return; 
-        
-        if (other.CompareTag("Combustible"))
+
+    /*
+      void OnTriggerEnter2D(Collider2D other)
         {
-            tieneCombustible = true;
-            other.gameObject.SetActive(false);
+            //if (!IsOwner) return; 
+
+            if (other.CompareTag("Combustible"))
+            {
+                tieneCombustible = true;
+                other.gameObject.SetActive(false);
 
 
-        }
+            }
 
 
-    }*/
+        }*/
 }

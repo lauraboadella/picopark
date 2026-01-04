@@ -44,7 +44,9 @@ public class ResetObject : NetworkBehaviour
     {
         if (IsServer) 
         {
-            ResetObjectClientRpc(initialPosition, initialActive, initialGravity);
+
+
+                ResetObjectClientRpc(initialPosition, initialActive, initialGravity);
         }
     }
 

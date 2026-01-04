@@ -17,7 +17,7 @@ public class pinchoTecho : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             
-            rb.gravityScale = 1f; 
+            rb.gravityScale = 3f; 
         }
     }
 
@@ -26,6 +26,11 @@ public class pinchoTecho : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             PlayerManager.Instance.RestartLevel();
+        }
+
+        if (collision.collider.CompareTag("Suelo"))
+        {
+            gameObject.SetActive(false);
         }
     }
 }
